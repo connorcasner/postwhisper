@@ -57,7 +57,7 @@ const Signup = () => {
         <div className="w-full flex justify-center">
           <Input
             type={"text"}
-            placeholder={"Enter  Names"}
+            placeholder={"Username"}
             handleChange={handleChange}
             name={"username"}
             value={formData.names}
@@ -66,7 +66,7 @@ const Signup = () => {
         <div className="w-full flex justify-center">
           <Input
             type={"email"}
-            placeholder={"Enter Your Email"}
+            placeholder={"Email"}
             icon={<MdEmail />}
             handleChange={handleChange}
             name={"email"}

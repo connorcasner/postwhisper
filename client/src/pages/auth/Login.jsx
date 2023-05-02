@@ -59,7 +59,7 @@ const Login = () => {
         <div className="w-full flex justify-center">
           <Input
             type={"text"}
-            placeholder={"Enter Your username"}
+            placeholder={"username"}
             handleChange={handleChange}
             name={"username"}
             value={formData.username}
