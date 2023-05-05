@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../buttons";
 import { api } from "../../api";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,6 +33,12 @@ const Navbar = () => {
           name={"Log out"}
           className="bg-primary text-white text-center border-none outline-none"
         />
+        <Link to="/account">
+          <Button
+            name="Got to account"
+            className="bg-primary text-white text-center border-none outline-none"
+          />
+        </Link>
       </div>
     </div>
   );
