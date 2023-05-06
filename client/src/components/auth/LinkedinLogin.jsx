@@ -3,7 +3,7 @@ import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
 import { useDispatch } from "react-redux";
 import { linkedinAuth } from "../../features/userSlice";
 import { toast } from "react-toastify";
-import { useCallback } from 'react'
+import { useCallback } from "react";
 
 function LinkedinLogin() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function LinkedinLogin() {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: `grant_type=authorization_code&code=${data}&redirect_uri=${"http://localhost:5173"}&client_id=${"77e4t6z5k9k8mv"}&client_secret=${"attgpYvAzS8aEwsf"}`,
+          body: `grant_type=authorization_code&code=${data}&redirect_uri=${"http://localhost:5173/linkedin"}&client_id=${"77e4t6z5k9k8mv"}&client_secret=${"attgpYvAzS8aEwsf"}`,
         }
       );
 
@@ -58,7 +58,6 @@ function LinkedinLogin() {
       toast.error("linkedin server has failed. Try again later!", {
         position: toast.POSITION.TOP_RIGHT,
       });
-      console.log(error);
     }
   }, [])
 
@@ -66,7 +65,7 @@ function LinkedinLogin() {
     <div className="w-1/2">
       <LinkedIn
         clientId="77e4t6z5k9k8mv"
-        redirectUri="http://localhost:5173"
+        redirectUri="http://localhost:5173/linkedin"
         state={"attgpYvAzS8aEwsf"}
         onSuccess={handleLinkedInSuccess}
         onError={(error) => {
@@ -78,7 +77,7 @@ function LinkedinLogin() {
           <img
             onClick={linkedInLogin}
             src={linkedin}
-            alt="Connect"
+            alt="Sign in with Linked In"
             style={{ maxWidth: "180px", cursor: "pointer" }}
           />
         )}

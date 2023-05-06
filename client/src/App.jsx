@@ -18,32 +18,27 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
-  const user = useSelector((state) => state.user.token);
-  const user_linkedin_token = useSelector(state => state.user.accessToken)
-  console.log(user);
+  const userToken = useSelector((state) => state.user.token);
 
   return (
     <>
       <ToastContainer />
       <Router>
         <Routes>
+          <Route path="/linkedin" element={<LinkedInCallback />} />
           <Route
-            path='/'
-            element={user_linkedin_token ? <LinkedinCallback /> : <Navigate to={"/login"} />} 
-          />
-          <Route
-            path="/home"
-            element={user ? <Home /> : <Navigate to={"/login"} />}
+            path="/"
+            element={userToken ? <Home /> : <Navigate to={"/login"} />}
           />
           <Route
             path="/login"
-            element={!user ? <Login /> : <Navigate to={"/home"} />}
+            element={!userToken ? <Login /> : <Navigate to={"/"} />}
           />
           <Route
             path="/register"
-            element={!user ? <Signup /> : <Navigate to={"/home"} />}
+            element={!userToken ? <Signup /> : <Navigate to={"/"} />}
           />
-          <Route path="/account" element={<Account />} />
+          <Route path="/account" element={userToken ? <Account /> : <Navigate to="/login" />} />
 
           <Route path="*" element={<Notfound />} />
         </Routes>

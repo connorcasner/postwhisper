@@ -68,13 +68,13 @@ const Account = () => {
   };
 
   const fetchLatestPosts = async (accessToken) => {
+    console.log(user.profilePic)
     const response = await fetch(
       `${corsProxyUrl}https://api.linkedin.com/v2/shares?q=owners&owners=urn:li:person:${user.id}&count=4`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "cache-control": "no-cache",
-          "X-Restli-Protocol-Version": "2.0.0",
+          "Content-Type": "application/json",
         },
       }
     );
@@ -89,7 +89,6 @@ const Account = () => {
     }
 
     const { elements } = await response.json();
-    console.log(elements);
     setUserPosts(elements);
     return elements;
   };
@@ -107,6 +106,12 @@ const Account = () => {
             "No profile picture available"
           )}
         </div>
+        <button
+          className={`w-[80%] h-[2.3rem] ${user.accessToken ? "bg-green-500" : "bg-[#ff0000bd]"}`}
+          type="button"
+        >
+          {user.accessToken ? "connected to your linkedin account" : "connect to linkedin account"}
+        </button>
       </div>
       <form
         onSubmit={handlePost}
@@ -119,7 +124,7 @@ const Account = () => {
           cols="30"
           rows="50"
           className="w-[80%] h-[10rem] border p-2 text-gray-500 outline-none"
-          disabled={user.accessToken == undefined ? true : false}
+          disabled={!user.accessToken ? true : false}
           onChange={handleChange}
         ></textarea>
         <button className="w-[80%] h-[2.3rem] bg-[#00ffffb7]">
@@ -128,7 +133,7 @@ const Account = () => {
         <button
           className="w-[80%] h-[2.3rem] bg-[#00ffffb7]"
           type="button"
-          onClick={fetchLatestPosts}
+          onClick={() => fetchLatestPosts(user.accessToken)}
         >
           Get latest posts
         </button>
